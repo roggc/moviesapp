@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { BASE_URL, CONFIG, API_KEY, GUEST_SESSION } from "src/config/api";
 import { useActions, imageConfig, guestSession, useValues } from "src/slices";
 import { MOVIESAPP_GUESTSESSION_VALUE } from "src/constants_/slices";
+import { isExpired } from "src/utils/date";
 
 const Layout = () => {
   const { [MOVIESAPP_GUESTSESSION_VALUE]: guestSessionValue } =
@@ -31,9 +32,14 @@ const Layout = () => {
       );
       const data = await resp.json();
       console.log("data", data);
-      setGuestSessionValue(data);
+      const { expires_at, guest_session_id, success } = data;
+      setGuestSessionValue({
+        expiresAt: expires_at,
+        sessionId: guest_session_id,
+        isSuccess: success,
+      });
     };
-    if (!guestSessionValue) {
+    if (!guestSessionValue || isExpired(guestSessionValue.expiresAt)) {
       fetchGuestSession();
     }
   }, [guestSessionValue, setGuestSessionValue]);
