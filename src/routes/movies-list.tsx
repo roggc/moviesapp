@@ -1,21 +1,15 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Movie, ImageConfig } from "src/types/api";
-import { BASE_URL, API_KEY, POPULAR_MOVIES, CONFIG } from "src/config/api";
+import { Movie } from "src/types/api";
+import { BASE_URL, API_KEY, POPULAR_MOVIES } from "src/config/api";
 import { useNavigate } from "react-router-dom";
+import { useValues, imageConfig } from "src/slices";
 
 const MoviesList = () => {
+  const { value: imageConfigValue } = useValues(imageConfig);
   const navigate = useNavigate();
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [config, setConfig] = useState<ImageConfig | undefined>();
   useEffect(() => {
-    const fetchConfiguration = async () => {
-      const resp = await fetch(`${BASE_URL}${CONFIG}?api_key=${API_KEY}`);
-      const data = await resp.json();
-      console.log("data", data);
-      const { images } = data;
-      setConfig(images);
-    };
     const fetchMovies = async () => {
       const resp = await fetch(
         `${BASE_URL}${POPULAR_MOVIES}?api_key=${API_KEY}`
@@ -25,7 +19,6 @@ const MoviesList = () => {
       const { results } = data;
       setMovies(results);
     };
-    fetchConfiguration();
     fetchMovies();
   }, []);
 
@@ -34,7 +27,7 @@ const MoviesList = () => {
       {movies.map((m) => (
         <Card key={m.id} onClick={() => navigate(`details/${m.id}`)}>
           <Image
-            src={`${config?.base_url}${config?.poster_sizes?.[4]}${m.poster_path}`}
+            src={`${imageConfigValue?.base_url}${imageConfigValue?.poster_sizes?.[4]}${m.poster_path}`}
             alt={m.title}
           />
           <CardRightContainer>
