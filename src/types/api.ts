@@ -9,3 +9,7 @@ export type ImageConfig = {
   base_url: string;
   poster_sizes: string[];
 };
+
+export type MovieDetails = Movie & {
+  overview: string;
+};
