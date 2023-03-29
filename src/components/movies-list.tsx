@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Movie, ImageConfig } from "src/types/api";
 import { BASE_URL, API_KEY, POPULAR_MOVIES, CONFIG } from "src/config/api";
 
-const App = () => {
+const MoviesList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [config, setConfig] = useState<ImageConfig | undefined>();
   useEffect(() => {
@@ -45,7 +45,7 @@ const App = () => {
   );
 };
 
-export default App;
+export default MoviesList;
 
 const Card = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius};
