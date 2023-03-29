@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL, MOVIE_DETAILS, API_KEY } from "src/config/api";
 import { MovieDetails } from "src/types/api";
+import Card from "src/components/card";
 
 const DetailsPage = () => {
   const { movieId } = useParams();
-  const [movieDetails, setMovieDetails] = useState<MovieDetails>();
+  const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
   useEffect(() => {
     const fetchMovieDetails = async () => {
       const resp = await fetch(
@@ -17,7 +18,17 @@ const DetailsPage = () => {
     };
     fetchMovieDetails();
   }, [movieId]);
-  return <>{movieId}</>;
+
+  return (
+    <>
+      <Card
+        title={movieDetails?.title}
+        releaseDate={movieDetails?.release_date}
+        posterPath={movieDetails?.poster_path}
+        overView={movieDetails?.overview}
+      />
+    </>
+  );
 };
 
 export default DetailsPage;

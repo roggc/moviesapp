@@ -3,10 +3,10 @@ import styled from "styled-components";
 import { useValues, imageConfig } from "src/slices";
 
 type CardProps = {
-  title: string;
-  releaseDate: string;
-  posterPath: string;
-  overView?: string;
+  title: string | undefined;
+  releaseDate: string | undefined;
+  posterPath: string | undefined;
+  overView?: string | undefined;
   onClick?: () => void;
 };
 
@@ -32,6 +32,7 @@ const Card: FC<CardProps> = ({
       <CardRightContainer>
         <Title>{title}</Title>
         <ReleaseDate>{releaseDate}</ReleaseDate>
+        {!!overView && <OverView>{overView}</OverView>}
       </CardRightContainer>
     </CardContainer>
   );
@@ -63,3 +64,4 @@ const CardRightContainer = styled.div`
 
 const Title = styled.div``;
 const ReleaseDate = styled.div``;
+const OverView = styled.div``;
