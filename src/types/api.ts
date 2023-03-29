@@ -13,3 +13,9 @@ export type ImageConfig = {
 export type MovieDetails = Movie & {
   overview: string;
 };
+
+export type GuestSession = {
+  sessionId: string;
+  expiresAt: string;
+  isSuccess: boolean;
+};

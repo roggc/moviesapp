@@ -3,3 +3,4 @@ export const BASE_URL = "https://api.themoviedb.org/3";
 export const POPULAR_MOVIES = "/movie/popular";
 export const CONFIG = "/configuration";
 export const MOVIE_DETAILS = "/movie/";
+export const GUEST_SESSION = "/authentication/guest_session/new";
