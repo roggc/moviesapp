@@ -9,7 +9,8 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import MoviesList from "src/components/movies-list";
+import MoviesList from "src/routes/movies-list";
+import DetailsPage from "src/routes/details-page";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -19,7 +20,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<MoviesList />} />
-      <Route path="details/:movieId" />
+      <Route path="details/:movieId" element={<DetailsPage />} />
     </Route>
   )
 );
