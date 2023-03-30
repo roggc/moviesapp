@@ -28,7 +28,7 @@ const DetailsPage = () => {
         posterPath={movieDetails?.poster_path}
         overView={movieDetails?.overview}
       />
-      <Rating />
+      <Rating movieId={movieId} />
     </>
   );
 };

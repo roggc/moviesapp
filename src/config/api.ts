@@ -4,4 +4,5 @@ export const POPULAR_MOVIES = "/movie/popular";
 export const CONFIG = "/configuration";
 export const MOVIE_DETAILS = "/movie/";
 export const GUEST_SESSION = "/authentication/guest_session/new";
-export const movieRating = (movieId: number) => `/movie/${movieId}/rating`;
+export const movieRating = (movieId: string | undefined) =>
+  `/movie/${movieId}/rating`;
