@@ -40,4 +40,6 @@ export default MoviesList;
 
 const PageContainer = styled.div`
   display: inline-flex;
+  overflow-x: scroll;
+  max-width: 100vw;
 `;

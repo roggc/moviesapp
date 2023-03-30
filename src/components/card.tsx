@@ -8,6 +8,7 @@ type CardProps = {
   posterPath: string | undefined;
   overView?: string | undefined;
   onClick?: () => void;
+  rate?: number;
 };
 
 const Card: FC<CardProps> = ({
@@ -16,6 +17,7 @@ const Card: FC<CardProps> = ({
   posterPath,
   overView,
   onClick,
+  rate,
   ...props
 }) => {
   const { value: imageConfigValue } = useValues(imageConfig);
@@ -33,6 +35,12 @@ const Card: FC<CardProps> = ({
         <Title>{title}</Title>
         <ReleaseDate>{releaseDate}</ReleaseDate>
         {!!overView && <OverView>{overView}</OverView>}
+        {!!rate && (
+          <RateContainer>
+            <Label>Rate:</Label>
+            <Rate>{rate}</Rate>
+          </RateContainer>
+        )}
       </CardRightContainer>
     </CardContainer>
   );
@@ -65,3 +73,9 @@ const CardRightContainer = styled.div`
 const Title = styled.div``;
 const ReleaseDate = styled.div``;
 const OverView = styled.div``;
+const RateContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+const Label = styled.div``;
+const Rate = styled.div``;

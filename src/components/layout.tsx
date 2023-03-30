@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { BASE_URL, CONFIG, API_KEY, GUEST_SESSION } from "src/config/api";
@@ -55,7 +55,10 @@ const Layout = () => {
 
   return (
     <>
-      <Header>Movies App</Header>
+      <Header>
+        <Link to="/">Movies App</Link>
+        <Link to="my-list">myList</Link>
+      </Header>
       <Outlet />
     </>
   );
@@ -69,4 +72,6 @@ const Header = styled.div`
   border-bottom: 1px solid black;
   padding: ${({ theme }) => theme.padding};
   background-color: white;
+  display: flex;
+  justify-content: space-between;
 `;

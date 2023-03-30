@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import MoviesList from "src/routes/movies-list";
 import DetailsPage from "src/routes/details-page";
+import MyList from "src/routes/my-list";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />}>
       <Route index element={<MoviesList />} />
       <Route path="details/:movieId" element={<DetailsPage />} />
+      <Route path="my-list" element={<MyList />} />
     </Route>
   )
 );
