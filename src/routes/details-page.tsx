@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { BASE_URL, MOVIE_DETAILS, API_KEY } from "src/config/api";
 import { MovieDetails } from "src/types/api";
 import Card from "src/components/card";
+import Rating from "src/components/rating";
 
 const DetailsPage = () => {
   const { movieId } = useParams();
@@ -27,6 +28,7 @@ const DetailsPage = () => {
         posterPath={movieDetails?.poster_path}
         overView={movieDetails?.overview}
       />
+      <Rating />
     </>
   );
 };
