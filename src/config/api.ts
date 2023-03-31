@@ -6,3 +6,4 @@ export const MOVIE_DETAILS = "/movie/";
 export const GUEST_SESSION = "/authentication/guest_session/new";
 export const movieRating = (movieId: string | undefined) =>
   `/movie/${movieId}/rating`;
+export const SEARCH_MOVIES = "/search/movie";

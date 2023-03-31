@@ -129,7 +129,7 @@ const RatingContainer = styled.div`
 
 const Input = styled.input`
   border-radius: ${({ theme }) => theme.borderRadius};
-  height: 40px;
+  height: ${({ theme }) => theme.inputHeight};
 `;
 
 const InputContainer = styled.div`

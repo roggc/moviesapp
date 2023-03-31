@@ -57,7 +57,10 @@ const Layout = () => {
     <>
       <Header>
         <Link to="/">Movies App</Link>
-        <Link to="my-list">myList</Link>
+        <RightLinksContainer>
+          <Link to="search-movies">search</Link>
+          <Link to="my-list">myList</Link>
+        </RightLinksContainer>
       </Header>
       <Outlet />
     </>
@@ -74,4 +77,10 @@ const Header = styled.div`
   background-color: white;
   display: flex;
   justify-content: space-between;
+`;
+
+const RightLinksContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 `;

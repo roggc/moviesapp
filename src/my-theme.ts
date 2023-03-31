@@ -7,6 +7,7 @@ const myTheme: DefaultTheme = {
     main: "red",
     secondary: "blue",
   },
+  inputHeight: "40px",
 };
 
 export { myTheme };

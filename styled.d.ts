@@ -8,5 +8,6 @@ declare module "styled-components" {
       main: string;
       secondary: string;
     };
+    inputHeight: string;
   }
 }
