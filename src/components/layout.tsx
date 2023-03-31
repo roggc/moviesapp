@@ -58,6 +58,7 @@ const Layout = () => {
       <Header>
         <Link to="/">Movies App</Link>
         <RightLinksContainer>
+          <Link to="/">popular</Link>
           <Link to="search-movies">search</Link>
           <Link to="my-list">myList</Link>
         </RightLinksContainer>
