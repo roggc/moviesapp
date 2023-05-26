@@ -1,10 +1,6 @@
 import { useState, ChangeEvent, useEffect, FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { useValues, ratings, guestSession, useActions } from "src/slices";
-import {
-  MOVIESAPP_RATINGS_VALUE,
-  MOVIESAPP_GUESTSESSION_VALUE,
-} from "src/constants_/slices";
+import { useSlice } from "src/slices";
 import { Rating as RatingType } from "src/types/rating";
 import { BASE_URL, API_KEY, movieRating } from "src/config/api";
 
@@ -17,18 +13,13 @@ type RatingProps = {
 } & HTMLAttributes<HTMLDivElement>;
 
 const Rating: FC<RatingProps> = ({ movieId, ...props }) => {
-  const { [MOVIESAPP_RATINGS_VALUE]: ratingsValue } = useValues(ratings);
-  const {
-    [MOVIESAPP_GUESTSESSION_VALUE]: { sessionId },
-  } = useValues(guestSession);
+  const [ratings, setRatings] = useSlice("ratings");
+  const [{ sessionId }] = useSlice("guestSession");
   const [rating, setRating] = useState(initialInputValue);
   const [auxValue, setAuxValue] = useState(rating);
   const [isDisabled, setIsDisabled] = useState(
-    ratingsValue.some((r: RatingType) => r.movieId === movieId)
+    ratings.some((r: RatingType) => r.movieId === movieId)
   );
-  const {
-    [ratings]: { add: addRating },
-  } = useActions();
 
   const validateInputValue = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -74,19 +65,18 @@ const Rating: FC<RatingProps> = ({ movieId, ...props }) => {
       }
     );
     const data = await resp.json();
-    console.log("data", data);
     const { success } = data;
     if (success) {
       const ratingToAdd = { movieId, rating };
-      addRating(ratingToAdd);
+      setRatings((rs: any) => [...rs, ratingToAdd]);
     } else {
       setIsDisabled(false);
     }
   };
 
   useEffect(() => {
-    localStorage.setItem(MOVIESAPP_RATINGS_VALUE, JSON.stringify(ratingsValue));
-  }, [ratingsValue]);
+    localStorage.setItem("ratings", JSON.stringify(ratings));
+  }, [ratings]);
 
   return (
     <RatingContainer {...props}>
@@ -94,10 +84,7 @@ const Rating: FC<RatingProps> = ({ movieId, ...props }) => {
         <Label>Rate:</Label>
         {isDisabled ? (
           <Label>
-            {
-              ratingsValue.find((r: RatingType) => r.movieId === movieId)
-                ?.rating
-            }
+            {ratings.find((r: RatingType) => r.movieId === movieId)?.rating}
           </Label>
         ) : (
           <>

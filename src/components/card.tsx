@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { useValues, imageConfig } from "src/slices";
+import { useSlice } from "src/slices";
 
 type CardProps = {
   title: string | undefined;
@@ -20,7 +20,7 @@ const Card: FC<CardProps> = ({
   rate,
   ...props
 }) => {
-  const { value: imageConfigValue } = useValues(imageConfig);
+  const [imageConfig] = useSlice("imageConfig");
   return (
     <CardContainer
       onClick={() => onClick?.()}
@@ -28,7 +28,7 @@ const Card: FC<CardProps> = ({
       {...props}
     >
       <Image
-        src={`${imageConfigValue?.base_url}${imageConfigValue?.poster_sizes?.[4]}${posterPath}`}
+        src={`${imageConfig?.base_url}${imageConfig?.poster_sizes?.[4]}${posterPath}`}
         alt={title}
       />
       <CardRightContainer>

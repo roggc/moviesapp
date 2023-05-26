@@ -14,7 +14,6 @@ const MoviesList = () => {
         `${BASE_URL}${POPULAR_MOVIES}?api_key=${API_KEY}`
       );
       const data = await resp.json();
-      console.log("data", data);
       const { results } = data;
       setMovies(results);
     };

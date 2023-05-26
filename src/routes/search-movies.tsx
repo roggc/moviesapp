@@ -34,7 +34,6 @@ const SearchMovies = () => {
         `${BASE_URL}${SEARCH_MOVIES}?api_key=${API_KEY}&query=${querySearch}`
       );
       const data = await resp.json();
-      console.log("data", data);
       const { results } = data;
       setMoviesList(results);
     };

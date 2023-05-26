@@ -14,7 +14,6 @@ const DetailsPage = () => {
         `${BASE_URL}${MOVIE_DETAILS}${movieId}?api_key=${API_KEY}`
       );
       const data = await resp.json();
-      console.log("data", data);
       setMovieDetails(data);
     };
     fetchMovieDetails();

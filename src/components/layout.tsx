@@ -2,28 +2,22 @@ import { Outlet, Link } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { BASE_URL, CONFIG, API_KEY, GUEST_SESSION } from "src/config/api";
-import { useActions, imageConfig, guestSession, useValues } from "src/slices";
-import { MOVIESAPP_GUESTSESSION_VALUE } from "src/constants_/slices";
+import { useSlice } from "src/slices";
 import { isExpired } from "src/utils/date";
 
 const Layout = () => {
-  const { [MOVIESAPP_GUESTSESSION_VALUE]: guestSessionValue } =
-    useValues(guestSession);
-  const {
-    [imageConfig]: { set: setImageConfigValue },
-    [guestSession]: { set: setGuestSessionValue },
-  } = useActions();
+  const [guestSession, setGuestSession] = useSlice("guestSession");
+  const [, setImageConfig] = useSlice("imageConfig");
 
   useEffect(() => {
     const fetchConfiguration = async () => {
       const resp = await fetch(`${BASE_URL}${CONFIG}?api_key=${API_KEY}`);
       const data = await resp.json();
-      console.log("data", data);
       const { images } = data;
-      setImageConfigValue(images);
+      setImageConfig(images);
     };
     fetchConfiguration();
-  }, [setImageConfigValue]);
+  }, [setImageConfig]);
 
   useEffect(() => {
     const fetchGuestSession = async () => {
@@ -31,27 +25,23 @@ const Layout = () => {
         `${BASE_URL}${GUEST_SESSION}?api_key=${API_KEY}`
       );
       const data = await resp.json();
-      console.log("data", data);
       const { expires_at, guest_session_id, success } = data;
-      setGuestSessionValue({
+      setGuestSession({
         expiresAt: expires_at,
         sessionId: guest_session_id,
         isSuccess: success,
       });
     };
-    if (!guestSessionValue || isExpired(guestSessionValue.expiresAt)) {
+    if (!guestSession || isExpired(guestSession.expiresAt)) {
       fetchGuestSession();
     }
-  }, [guestSessionValue, setGuestSessionValue]);
+  }, [guestSession, setGuestSession]);
 
   useEffect(() => {
-    if (!!guestSessionValue) {
-      localStorage.setItem(
-        MOVIESAPP_GUESTSESSION_VALUE,
-        JSON.stringify(guestSessionValue)
-      );
+    if (!!guestSession) {
+      localStorage.setItem("guestSession", JSON.stringify(guestSession));
     }
-  }, [guestSessionValue]);
+  }, [guestSession]);
 
   return (
     <>
