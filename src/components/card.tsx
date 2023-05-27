@@ -1,6 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
 import { useSlice } from "src/slices";
+import { ImageConfig } from "src/types";
 
 type CardProps = {
   title: string | undefined;
@@ -20,7 +21,7 @@ const Card: FC<CardProps> = ({
   rate,
   ...props
 }) => {
-  const [imageConfig] = useSlice("imageConfig");
+  const [imageConfig] = useSlice<ImageConfig>("imageConfig");
   return (
     <CardContainer
       onClick={() => onClick?.()}

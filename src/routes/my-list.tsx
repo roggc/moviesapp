@@ -6,7 +6,7 @@ import Card from "src/components/card";
 import styled from "styled-components";
 
 const MyList = () => {
-  const [ratings] = useSlice("ratings");
+  const [ratings] = useSlice<Rating[]>("ratings");
   const [moviesDetails, setMoviesDetails] = useState<MovieDetails[]>([]);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const MyList = () => {
           posterPath={md.poster_path}
           releaseDate={md.release_date}
           overView={md.overview}
-          rate={ratings.find((rV: Rating) => rV.movieId === md.id + "").rating}
+          rate={ratings.find((rV) => rV.movieId === md?.id + "")?.rating}
         />
       ))}
     </List>

@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, useEffect, FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { useSlice } from "src/slices";
-import { Rating as RatingType } from "src/types/rating";
+import { Rating as RatingType, GuestSession } from "src/types";
 import { BASE_URL, API_KEY, movieRating } from "src/config/api";
 
 const initialInputValue = "5";
@@ -13,8 +13,8 @@ type RatingProps = {
 } & HTMLAttributes<HTMLDivElement>;
 
 const Rating: FC<RatingProps> = ({ movieId, ...props }) => {
-  const [ratings, setRatings] = useSlice("ratings");
-  const [{ sessionId }] = useSlice("guestSession");
+  const [ratings, setRatings] = useSlice<RatingType[]>("ratings");
+  const [{ sessionId }] = useSlice<GuestSession>("guestSession");
   const [rating, setRating] = useState(initialInputValue);
   const [auxValue, setAuxValue] = useState(rating);
   const [isDisabled, setIsDisabled] = useState(

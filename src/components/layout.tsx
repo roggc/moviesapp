@@ -4,9 +4,11 @@ import { useEffect } from "react";
 import { BASE_URL, CONFIG, API_KEY, GUEST_SESSION } from "src/config/api";
 import { useSlice } from "src/slices";
 import { isExpired } from "src/utils/date";
+import { GuestSession } from "src/types";
 
 const Layout = () => {
-  const [guestSession, setGuestSession] = useSlice("guestSession");
+  const [guestSession, setGuestSession] =
+    useSlice<GuestSession>("guestSession");
   const [, setImageConfig] = useSlice("imageConfig");
 
   useEffect(() => {
