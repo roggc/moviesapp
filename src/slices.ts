@@ -1,15 +1,17 @@
 import getHookAndProviderFromSlices, {
   defineSlice,
 } from "react-context-slices";
+import { ImageConfig, GuestSession, Rating } from "./types";
 
 export const { useSlice, Provider } = getHookAndProviderFromSlices({
-  guestSession: defineSlice<any>({
-    initialState: null,
+  guestSession: defineSlice<GuestSession | null>({
+    initialArg: null,
+    init: () => null,
     isGetInitialStateFromStorage: true,
   }),
-  imageConfig: defineSlice<any>({ initialState: null }),
-  ratings: defineSlice<any[]>({
-    initialState: [],
+  imageConfig: defineSlice<ImageConfig>({ initialArg: null }),
+  ratings: defineSlice<Rating[]>({
+    initialArg: [],
     isGetInitialStateFromStorage: true,
   }),
 });
