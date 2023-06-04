@@ -9,7 +9,7 @@ export const { useSlice, Provider } = getHookAndProviderFromSlices({
     init: () => null,
     isGetInitialStateFromStorage: true,
   }),
-  imageConfig: defineSlice<ImageConfig>({ initialArg: null }),
+  imageConfig: defineSlice<ImageConfig | null>({ initialArg: null }),
   ratings: defineSlice<Rating[]>({
     initialArg: [],
     isGetInitialStateFromStorage: true,
